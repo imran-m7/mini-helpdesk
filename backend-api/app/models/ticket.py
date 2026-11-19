@@ -19,10 +19,14 @@ class Ticket(Base):
     title: Mapped[str] = mapped_column(String(200), index=True)
     description: Mapped[str] = mapped_column(Text)
     status: Mapped[TicketStatus] = mapped_column(
-        Enum(TicketStatus), default=TicketStatus.open, index=True
+        Enum(TicketStatus, create_constraint=True),
+        default=TicketStatus.open,
+        index=True,
     )
     priority: Mapped[TicketPriority] = mapped_column(
-        Enum(TicketPriority), default=TicketPriority.medium, index=True
+        Enum(TicketPriority, create_constraint=True), # constraint only allows enum values
+        default=TicketPriority.medium,
+        index=True,
     )
 
     created_by_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
