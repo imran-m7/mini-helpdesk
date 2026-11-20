@@ -8,7 +8,7 @@ from app import models # registers all models with Base.metadata
 from app.core.config import settings
 from app.core.exceptions import AppError
 from app.db import Base, engine
-from app.routers import auth, tickets
+from app.routers import auth, comments, tickets
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,6 +38,7 @@ async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
 
 app.include_router(auth.router)
 app.include_router(tickets.router)
+app.include_router(comments.router)
 
 # endpoint to check if the API is running
 @app.get("/api/health")
