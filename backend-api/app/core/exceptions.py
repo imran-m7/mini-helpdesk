@@ -23,3 +23,6 @@ class UnauthorizedError(AppError):
 
 class ForbiddenError(AppError):
     status_code = 403
+
+class BadRequestError(AppError):
+    status_code = 400
