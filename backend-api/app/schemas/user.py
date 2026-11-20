@@ -15,7 +15,7 @@ class UserCreate(BaseModel):
     # for rules that field validators can't handle, we can use a class method validator
     # catch 422 error early, rather than 500 error from bcrypt when it tries to hash a password that's too long
     @field_validator("password")
-    @classmethod
+    @classmethod # needed because object is being created, so we don't have an instance yet
     def password_fits_bcrypt(cls, value: str) -> str:
         # bcrypt only accepts passwords up to 72 bytes
         if len(value.encode("utf-8")) > 72:
