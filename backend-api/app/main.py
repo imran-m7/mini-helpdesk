@@ -31,10 +31,15 @@ app.add_middleware(
 # when an AppError is raised, return a JSON response with the error details
 @app.exception_handler(AppError)
 async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
-    headers = {"WWW-Authenticate": "Bearer"} if exc.status_code == 401 else None
+    headers = {"WWW-Authenticate": "Bearer"} if exc.status_code == 401 else None # only for 401 errors, to tell the client to send a token
     return JSONResponse(
         status_code=exc.status_code, content={"detail": exc.detail}, headers=headers
     )
+
+@app.exception_handler(Exception)
+async def unexpected_error_handler(request: Request, exc: Exception) -> JSONResponse:
+    # any bug we didn't anticipate: same JSON shape as our other errors, no details leaked
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
 
 app.include_router(auth.router)
 app.include_router(tickets.router)
