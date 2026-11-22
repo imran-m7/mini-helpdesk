@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import TicketsPage from "./pages/TicketsPage";
 import TicketDetailPage from "./pages/TicketDetailPage";
+import TicketFormPage from "./pages/TicketFormPage";
 
 export default function App() {
   return (
@@ -19,7 +20,9 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/tickets" element={<TicketsPage />} />
+              <Route path="/tickets/new" element={<TicketFormPage />} />
               <Route path="/tickets/:id" element={<TicketDetailPage />} />
+              <Route path="/tickets/:id/edit" element={<TicketFormPage />} />
             </Route>
           </Route>
 

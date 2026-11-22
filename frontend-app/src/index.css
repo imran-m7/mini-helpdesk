@@ -238,3 +238,9 @@ a { color: var(--color-primary); }
 }
 .comment-form textarea[aria-invalid="true"] { border-color: var(--color-error); }
 .comment-form .btn { align-self: flex-start; }
+
+/* ---------- ticket form ---------- */
+.form-page { max-width: 700px; }
+.ticket-form { display: flex; flex-direction: column; gap: 1rem; }
+.ticket-form textarea { resize: vertical; }
+.form-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
